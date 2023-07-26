@@ -8,7 +8,7 @@ const episodeSchema = new Schema(
       required: true
     },
     img: {
-      type: String,
+      type: String
     },
     name: {
       type: String,
@@ -26,9 +26,9 @@ const episodeSchema = new Schema(
       type: [Object]
     }
   }, {
-  versionKey: false,
-  timestamps: true
-}
+    versionKey: false,
+    timestamps: true
+  }
 )
 
 episodeSchema.plugin(mongooosePaginate)
