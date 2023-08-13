@@ -6,6 +6,7 @@ import characterService from './services/character.service'
 import { PaginateResult, Document } from 'mongoose'
 // dtos
 import { ICharacterInfoDto } from './services/dtos/character-info.dto'
+import { ICharacterFilters } from './services/dtos/charater-filters.dto'
 
 export const characterController = async ({ api, router }: { api: string; router: Router }) => {
   const route = `${api}/characters`
@@ -13,7 +14,7 @@ export const characterController = async ({ api, router }: { api: string; router
   router
     .get(`${route}/getAllCharacters`, async (req, res) => {
       const result = new AppResponse<PaginateResult<Document<any, any, ICharacterInfoDto>>>()
-      const filters = req.query
+      const filters = req.query as ICharacterFilters
       try {
         result.response = await characterService.getAllCharacters(filters)
 
