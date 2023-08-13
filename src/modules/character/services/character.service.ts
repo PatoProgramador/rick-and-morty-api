@@ -5,14 +5,22 @@ import { ICharacterInfoDto } from './dtos/character-info.dto'
 // utils
 import { PaginateResult, Document } from 'mongoose'
 
+interface CharacterFilters {
+  page?: string;
+  limit?: string;
+  // Agrega otros campos de filtro aquí si los tienes
+}
+
 class CharacterService {
-  async getAllCharacters (): Promise<PaginateResult<Document<any, any, any>>> {
+  async getAllCharacters (filters?: CharacterFilters): Promise<PaginateResult<Document<any, any, ICharacterInfoDto>>> {
+    // Use of the Query to configure the paginate options
     const options = {
-      page: 1,
-      limit: 10
+      page: filters?.page ? parseInt(filters.page) : 1,
+      limit: filters?.limit ? parseInt(filters.limit) : 10
     }
-    const res = await Character.paginate({}, options)
-    if (res.docs.length === 0) throw new Error('Aún no hay cuentas en la base de datos')
+
+    const res = await Character.paginate({ }, options)
+    if (res.total === 0) throw new Error('No hay personajes bajo esta categoría')
 
     return res
   }

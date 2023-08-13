@@ -12,9 +12,10 @@ export const characterController = async ({ api, router }: { api: string; router
 
   router
     .get(`${route}/getAllCharacters`, async (req, res) => {
-      const result = new AppResponse<PaginateResult<Document<any, any, any>>>()
+      const result = new AppResponse<PaginateResult<Document<any, any, ICharacterInfoDto>>>()
+      const filters = req.query
       try {
-        result.response = await characterService.getAllCharacters()
+        result.response = await characterService.getAllCharacters(filters)
 
         return res.status(200).json(result)
       } catch (err) {
