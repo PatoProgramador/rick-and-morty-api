@@ -1,24 +1,24 @@
 // schemas
-import Episode from '../../../application/repositories/schemas/Episode'
+import Location from '../../../application/repositories/schemas/Location'
 // dtos
-import { IEpisodeInfoDto } from './dtos/episode-info.dto'
+import { ILocationIndoDto } from './dtos/location-info.dto'
 import { PaginateResult, Document } from 'mongoose'
 // utils
 
-class EpisodeService {
-  async getAllEpisodes (): Promise<PaginateResult<Document<any, any, any>>> {
+class LocationService {
+  async getAllLocations (): Promise<PaginateResult<Document<any, any, ILocationIndoDto>>> {
     const options = {
       page: 1,
       limit: 10
     }
-    const res = await Episode.paginate({}, options)
-    if (res.docs.length === 0) throw new Error('Aún no hay episodios en la base de datos')
+    const res = await Location.paginate({}, options)
+    if (res.docs.length === 0) throw new Error('Aún no hay locaciones en la base de datos')
 
     return res
   }
 
-  async getEpisodeById (id: string): Promise<Document<IEpisodeInfoDto>> {
-    const res = await Episode.findById(id).exec()
+  async getLocationById (id: string): Promise<Document<ILocationIndoDto>> {
+    const res = await Location.findById(id).exec()
 
     if (!res) throw new Error('Aún no hay episodios en la base de datos')
 
@@ -26,4 +26,4 @@ class EpisodeService {
   }
 }
 
-export default new EpisodeService()
+export default new LocationService()
