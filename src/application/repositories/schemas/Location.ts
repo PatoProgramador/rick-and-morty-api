@@ -12,7 +12,7 @@ const locationSchema = new Schema(
       required: true
     },
     type: {
-      type: String,
+      type: String
     },
     dimension: {
       type: String
@@ -21,9 +21,9 @@ const locationSchema = new Schema(
       type: [Object]
     }
   }, {
-  versionKey: false,
-  timestamps: true
-}
+    versionKey: false,
+    timestamps: true
+  }
 )
 
 locationSchema.plugin(mongooosePaginate)

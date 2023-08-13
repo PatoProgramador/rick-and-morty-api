@@ -6,7 +6,7 @@ import { PaginateResult, Document } from 'mongoose'
 // utils
 
 class EpisodeService {
-  async getAllEpisodes (): Promise<PaginateResult<Document<any, any, IEpisodeInfoDto>>> {
+  async getAllEpisodes (): Promise<PaginateResult<Document<any, any, any>>> {
     const options = {
       page: 1,
       limit: 10
