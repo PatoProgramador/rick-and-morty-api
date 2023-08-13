@@ -1,5 +1,11 @@
 import { Schema, Document } from 'mongoose'
 
+interface characterEpisodes {
+  id: Schema.Types.ObjectId
+  apiID: number
+  name: string
+  episode: string
+}
 export interface ICharacterInfoDto extends Document {
   apiID?: number;
   name: string;
@@ -15,5 +21,5 @@ export interface ICharacterInfoDto extends Document {
     id?: Schema.Types.ObjectId;
     name?: string;
   };
-  episodes: object[];
+  episodes: [characterEpisodes];
 }

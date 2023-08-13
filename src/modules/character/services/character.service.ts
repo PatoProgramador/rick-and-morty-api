@@ -2,17 +2,12 @@
 import Character from '../../../application/repositories/schemas/Character'
 // dtos
 import { ICharacterInfoDto } from './dtos/character-info.dto'
+import { ICharacterFilters } from './dtos/charater-filters.dto'
 // utils
 import { PaginateResult, Document } from 'mongoose'
 
-interface CharacterFilters {
-  page?: string;
-  limit?: string;
-  // Agrega otros campos de filtro aquí si los tienes
-}
-
 class CharacterService {
-  async getAllCharacters (filters?: CharacterFilters): Promise<PaginateResult<Document<any, any, ICharacterInfoDto>>> {
+  async getAllCharacters (filters?: ICharacterFilters): Promise<PaginateResult<Document<any, any, ICharacterInfoDto>>> {
     // Use of the Query to configure the paginate options
     const options = {
       page: filters?.page ? parseInt(filters.page) : 1,
